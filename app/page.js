@@ -2,11 +2,13 @@
 import React, { useEffect } from 'react';
 import { useState } from "react";
 import Link from "next/link";
+import {useAppContext} from "./context/AppContext";
 
 //As different pages have different API links, we need to create props in the MoviesDB component so that each page had its own API links.
 
 export default function MoviesDB() {
     const [movies, setMovies] = useState([]);
+    const [state, setState] = useAppContext();
     const API_URL = 'https://api.themoviedb.org/3/discover/movie?api_key=191cc9b801df0a2851e72996f511f57d';
     const getMovies = async () => {
         const response = await fetch(`${API_URL}`);
@@ -16,6 +18,8 @@ export default function MoviesDB() {
 
     useEffect(() => {
         getMovies();
+        setState({ ...state, newValue: 'New Data' });
+        console.log(state);
     }, []);
 
     return (
