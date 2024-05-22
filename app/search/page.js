@@ -43,7 +43,7 @@ export default function searchPage() {
             <div className="flex flex-row flex-wrap justify-between gap-5">
                 {movies.length > 0 ? (
                     movies.map((movie) => (
-                        <Link href={`details/${movie.id}`} className="card w-96 bg-base-100 shadow-xl">
+                        <Link href={`details/${movie.id}`} className="card w-96 bg-base-100 shadow-xl hover:bg-zinc-700">
                             <figure><img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} /></figure>
                             <div className="card-body">
                                 <h2 className="card-title">{movie.title}</h2>
