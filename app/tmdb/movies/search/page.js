@@ -1,12 +1,15 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 //
 //As different pages have different API links, we need to create props in the MoviesDB component so that each page had its own API links.
 
 export default function searchPage() {
+    const router = useRouter()
+    const inputRef = useRef(null);
     const [movies, setMovies] = useState([]);
     const [search, setSearch] = useState("");
     const API_URL_SEARCH = 'https://api.themoviedb.org/3/search/movie?api_key=191cc9b801df0a2851e72996f511f57d&query='
@@ -18,6 +21,9 @@ export default function searchPage() {
     }
     useEffect(() => {
         getMovie();
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
     }, []);
 
     const handleKeyDown = async (event) => {

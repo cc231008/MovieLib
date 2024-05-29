@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 import { useState } from "react";
 import Link from "next/link";
-import {useAppContext} from "./context/AppContext";
+import { useRouter } from 'next/navigation'
+
+//As different pages have different API links, we need to create props in the MoviesDB component so that each page had its own API links.
 
 export default function MoviesDB() {
     const [movies, setMovies] = useState([]);
@@ -16,8 +18,6 @@ export default function MoviesDB() {
 
     useEffect(() => {
         getMovies();
-        setState({ ...state, newValue: 'New Data' });
-        console.log(state);
     }, []);
 
     return (
