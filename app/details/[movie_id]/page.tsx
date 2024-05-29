@@ -20,21 +20,18 @@ export default function Card({params}: {
     }, []);
 
     return (
-        <div className="flex flex-col p-5">
-
-            <Link href={"/"}>
+        <div className="p-6">
+            <Link href={"/"} >
             <h1>MovieLib</h1>
             </Link>
-                <div>
                 <h1 className="flex justify-center">Movie Details</h1>
-                </div>
-
-
             <div>
                 {movieDetails && (
-                    <div className="flex flex-row">
+                    <div className="">
+                        <div className="flex justify-center">
                         <img src={`https://image.tmdb.org/t/p/w400${movieDetails["poster_path"]}`} alt="movie poster" />
-                        <div className="flex flex-col p-5 gap-y-5 text-xl">
+                        </div>
+                        <div className="flex gap-y-3 flex-col">
                             <h2>{movieDetails["title"]}</h2>
                             <p>Rating: {movieDetails["vote_average"]}</p>
                             <p>Release Date: {movieDetails["release_date"]}</p>
