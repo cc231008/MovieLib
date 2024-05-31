@@ -3,13 +3,11 @@ export default async function Card({params}) {
     const movieDetails = await response.json();
 
     return (
-        <div className="flex flex-col p-5">
-            <h1 className="flex justify-center">Movie Details</h1>
-
-
+        <div>
+            <h1 className="flex justify-center text-2xl md:text-3xl">Movie Details</h1>
             <div>
                 {movieDetails && (
-                    <div className="flex flex-row">
+                    <div className="flex md:flex-row flex-col">
                         <img src={`https://image.tmdb.org/t/p/w400${movieDetails["poster_path"]}`} alt="movie poster" />
                         <div className="flex flex-col p-5 gap-y-5 text-xl">
                             <h2>{movieDetails["title"]}</h2>

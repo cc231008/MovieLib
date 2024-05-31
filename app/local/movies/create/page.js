@@ -40,16 +40,16 @@ export default function CreateMovie() {
 
     return (
         <div >
-            <header className="flex flex-row justify-between p-6">
-                <div className="flex gap-10">
+            <header className="flex justify-between p-6">
                     <Link title="Home Page" href={"/local/movies"}>
-                        <h1>MovieLib</h1>
+                        <h1 className="text-2xl md:text-4xl mt-2 md:mt-0">MovieLib</h1>
                     </Link>
-                    <button className="btn btn-outline btn-primary" onClick={()=>router.push('/tmdb/movies/')}>Switch to TMDB server</button>
-                </div>
+                <div className="flex justify-end md:gap-x-5">
+                <button className="btn btn-ghost text-xs w-24 md:text-base md:w-36" onClick={()=>router.push('/tmdb/movies/')}>Switch to TMDB server</button>
                 <Link href="/local/movies/search" title="Search" className="input input-bordered flex items-center gap-2 bg-teal-950 hover:bg-zinc-700">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
                 </Link>
+                </div>
             </header>
 
             <div className="flex justify-center mt-15">
