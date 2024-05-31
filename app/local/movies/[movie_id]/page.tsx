@@ -14,7 +14,7 @@ export default function Card({params}: {
     const [movieDetails, setMovieDetails] = useState({});
     const [state, setState] = useAppContext();
     const getMovieDetails = () => {
-        const movie = state.movies.find((movie) => `${movie.id}` === `${params.movie_id}`);
+        const movie = state?.movies?.find((movie) => `${movie.id}` === `${params.movie_id}`);
         console.log(movie);
         setMovieDetails(movie);
     }

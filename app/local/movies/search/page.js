@@ -16,7 +16,7 @@ export default function searchPage() {
     const [search, setSearch] = useState("");
     const getMovies = () => {
         if (!search) return;
-        const results = state?.movies.filter((movie) => movie.title.indexOf(search) !== -1);
+        const results = state?.movies?.filter((movie) => movie.title.indexOf(search) !== -1);
         setMovies(results);
     }
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function searchPage() {
     function onHandleDelete(movieId, e) {
         e.stopPropagation();
         e.preventDefault();
-        const newMovies = state.movies.filter((movie) => movie.id !== movieId)
+        const newMovies = state?.movies?.filter((movie) => movie.id !== movieId)
         setState({...state, movies: newMovies});
     }
 
@@ -65,7 +65,7 @@ export default function searchPage() {
             </header>
 
             <div className="flex flex-row flex-wrap justify-between p-5 gap-5">
-                {movies.length > 0 ? (
+                {movies?.length > 0 ? (
                     movies.map((movie) => (
                         <Link href={`/local/movies/${movie.id}`} className="card w-96 bg-base-100 shadow-xl hover:bg-zinc-700">
                             <figure><img className="w-52 m-auto mt-4" src={movie.poster_url} alt={movie.title} /></figure>

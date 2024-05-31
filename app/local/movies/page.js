@@ -22,7 +22,7 @@ export default function MoviesDB() {
     function onHandleDelete(movieId, e) {
         e.stopPropagation();
         e.preventDefault();
-        const newMovies = state.movies.filter((movie) => movie.id !== movieId)
+        const newMovies = state?.movies?.filter((movie) => movie.id !== movieId)
         setState({...state, movies: newMovies});
     }
 
