@@ -5,7 +5,7 @@ export default async function MoviesDB() {
 
     const response = await fetch(`${API_URL}`); // Fetch data from API.
     const data = await response.json();
-    const movies = data.results;
+    const movies = data.results; // Extracts arrays of movies from the data object.
 
     return <MovieList movies={movies} /> // Pass the movies data to the MovieList component, in order to render the list of movies that we fetched from the API.
 }

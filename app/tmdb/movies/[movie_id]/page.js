@@ -1,5 +1,5 @@
 export default async function Card({params}) {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${params.movie_id}?language=en-US&api_key=${process.env.API_KEY}`);
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${params.movie_id}?language=en-US&api_key=${process.env.API_KEY}`); //Looks at id of chosen movie and fetches movie details from the API about this movie.
     const movieDetails = await response.json();
 
     return (

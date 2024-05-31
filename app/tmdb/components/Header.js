@@ -1,28 +1,20 @@
 'use client';  //We use "use client" to use Hooks in the component
 import Link from "next/link";
-import React, {useEffect, useRef} from 'react';
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
 
-
-
 export default function Header() {
     const router = useRouter()
-    const inputRef = useRef(null);
     const [search, setSearch] = useState("");
 
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, []);
-
+    // "handleKeyDown" function is used to handle the "Enter" key press event on the search input field.
     const handleKeyDown = (event) => {
         if (event.key === 'Enter' && search !== '') {
             router.push(`/tmdb/movies/search?s=${search}`);
         }
     };
 
+    //HTML code for the header component with the search input field.
     return (
         <header className="flex p-6 gap-x-5 justify-between">
             <div className="gap-10">
