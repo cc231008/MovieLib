@@ -1,8 +1,9 @@
-'use client';
+'use client';  //We use "use client" to use Hooks in the component
 import Link from "next/link";
 import React, {useEffect, useRef} from 'react';
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
+
 
 
 export default function Header() {

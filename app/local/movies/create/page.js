@@ -52,8 +52,8 @@ export default function CreateMovie() {
                 </div>
             </header>
 
-            <div className="flex justify-center mt-15">
-                <form className="flex bg-white flex-wrap w-[45rem] p-5 rounded content-stretch gap-5">
+            <div className="flex justify-center mt-36">
+                <form className="flex bg-gray-700 flex-wrap w-[45rem] p-5 rounded-lg content-stretch gap-5">
                     <input type="text" placeholder="Title" className="input input-bordered w-full max-w-xs" name="title" value={formData.title} onChange={handleChange} />
                     <input type="text" placeholder="Vote Average" className="input input-bordered w-full max-w-xs" name="vote_average" value={formData.vote_average} onChange={handleChange} />
                     <input type="text" placeholder="Release Date" className="input input-bordered w-full max-w-xs" name="release_date" value={formData.release_date} onChange={handleChange} />

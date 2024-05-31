@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+// MovieList component creates a list of movies.
 export default function MovieList({ movies }) {
     return (
         <div className="flex flex-row flex-wrap justify-center gap-11 pb-10">
