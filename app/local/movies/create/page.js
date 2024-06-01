@@ -1,8 +1,7 @@
 'use client'
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from "react";
-import Link from "next/link";
-import { useAppContext } from '../../../context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 import { useRouter } from 'next/navigation'
 
 export default function CreateMovie() {
@@ -29,6 +28,8 @@ export default function CreateMovie() {
         e.preventDefault();
 
         const movies = state.movies || [];
+
+        // lastMovieId is used to increment it and use it as an id of a newly created movie
         let lastMovieId = (typeof state.lastMovieId !== 'number') ? -1 : state.lastMovieId;
 
         movies.unshift({...formData, id: ++lastMovieId });
@@ -39,31 +40,16 @@ export default function CreateMovie() {
     };
 
     return (
-        <div >
-            <header className="flex justify-between p-6">
-                    <Link title="Home Page" href={"/local/movies"}>
-                        <h1 className="text-2xl md:text-4xl mt-2 md:mt-0">MovieLib</h1>
-                    </Link>
-                <div className="flex justify-end md:gap-x-5">
-                <button className="btn btn-ghost text-xs w-24 md:text-base md:w-36" onClick={()=>router.push('/tmdb/movies/')}>Switch to TMDB server</button>
-                <Link href="/local/movies/search" title="Search" className="input input-bordered flex items-center gap-2 bg-teal-950 hover:bg-zinc-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-                </Link>
-                </div>
-            </header>
-
-            <div className="flex justify-center mt-36">
-                <form className="flex bg-gray-700 flex-wrap w-[45rem] p-5 rounded-lg content-stretch gap-5">
-                    <input type="text" placeholder="Title" className="input input-bordered w-full max-w-xs" name="title" value={formData.title} onChange={handleChange} />
-                    <input type="text" placeholder="Vote Average" className="input input-bordered w-full max-w-xs" name="vote_average" value={formData.vote_average} onChange={handleChange} />
-                    <input type="text" placeholder="Release Date" className="input input-bordered w-full max-w-xs" name="release_date" value={formData.release_date} onChange={handleChange} />
-                    <input type="text" placeholder="Runtime" className="input input-bordered w-full max-w-xs" name="runtime" value={formData.runtime} onChange={handleChange} />
-                    <textarea placeholder="Poster URL" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="poster_url" value={formData.poster_url} onChange={handleChange}  ></textarea>
-                    <textarea placeholder="Overview" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="overview" value={formData.overview} onChange={handleChange} ></textarea>
-                    <button className="btn btn-active m-auto" onClick={handleSubmit}>Create New Movie</button>
-                </form>
-            </div>
-
+        <div className="flex justify-center mt-20">
+            <form className="flex items-center flex-col md:flex-row md:content-stretch gap-5 bg-gray-700 flex-wrap w-[45rem] p-5 rounded-lg mx-5 mb-5">
+                <input type="text" placeholder="Title" className="input input-bordered w-full max-w-xs" name="title" value={formData.title} onChange={handleChange} />
+                <input type="text" placeholder="Vote Average" className="input input-bordered w-full max-w-xs" name="vote_average" value={formData.vote_average} onChange={handleChange} />
+                <input type="text" placeholder="Release Date" className="input input-bordered w-full max-w-xs" name="release_date" value={formData.release_date} onChange={handleChange} />
+                <input type="text" placeholder="Runtime" className="input input-bordered w-full max-w-xs" name="runtime" value={formData.runtime} onChange={handleChange} />
+                <textarea placeholder="Poster URL" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="poster_url" value={formData.poster_url} onChange={handleChange}  ></textarea>
+                <textarea placeholder="Overview" className="textarea textarea-bordered textarea-lg w-full max-w-xs" name="overview" value={formData.overview} onChange={handleChange} ></textarea>
+                <button className="btn btn-active m-auto" onClick={handleSubmit}>Create New Movie</button>
+            </form>
         </div>
     );
 }

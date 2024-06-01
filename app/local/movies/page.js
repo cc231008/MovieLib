@@ -1,73 +1,71 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import { useState } from "react";
 import Link from "next/link";
-import { useAppContext } from '../../context/AppContext';
+import { useAppContext } from '../context/AppContext';
 import { useRouter } from 'next/navigation'
+import { SearchContext } from '../context/SearchContext';
 
 export default function MoviesDB() {
     const router = useRouter()
+    const { searchTerm, setSearchTerm } = useContext(SearchContext);
     const [state, setState] = useAppContext();
+    const [movieList, setMovieList] = useState([]);
 
-    const [mounted, setMounted] = useState(false);
+    // getMovies function is needed to get movies based on the current search term
+    // When search term is empty we get the whole list of movies
+    const getMovies = () => {
+        let results = state?.movies;
 
-    useEffect(() => {
-        setMounted(true);
-    }, []);
+        if (searchTerm) results = results.filter((movie) => movie.title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
 
-    if (!mounted) {
-        return null; // Or a loading spinner
+        setMovieList(results);
     }
 
+    // This is needed to reset search term so that we get whole list of movies when we come to this page
+    useEffect(() => {
+        setSearchTerm('');
+    }, [])
+
+    useEffect(() => {
+        getMovies();
+    }, [state?.movies, searchTerm]);
+
     function onHandleDelete(movieId, e) {
+        // This is needed so that our Link component doesn't get click event
+        // Before doing this there was a problem where Link also got the click event and redirected to other page which was unintended behavior
         e.stopPropagation();
         e.preventDefault();
-        const newMovies = state?.movies?.filter((movie) => movie.id !== movieId)
-        setState({...state, movies: newMovies});
+
+        const newMovieList = state?.movies?.filter((movie) => movie.id !== movieId) // We delete movie from a list by filtering it out based on id
+        setState({...state, movies: newMovieList});
     }
 
     function onHandleEdit(movieId, e) {
         e.stopPropagation();
         e.preventDefault();
-        router.push(`/local/movies/edit/${movieId}`);
+        router.push(`/local/movies/edit/${movieId}`); // This redirects to a page where user can edit selected movie
     }
 
     return (
-        <div>
-            <header className="flex justify-between p-6">
-                    <Link title="Home Page" href={"/local/movies"}>
-                        <h1 className="text-2xl md:text-4xl mt-2 md:mt-0">MovieLib</h1>
-                    </Link>
-                <div className="flex justify-end">
-                    <button className="btn btn-ghost text-xs md:text-base w-24 md:w-36" onClick={()=>router.push('/tmdb/movies/')}>Switch to TMDB server</button>
-                    <button onClick={()=>router.push('/local/movies/create')} className="btn btn-ghost text-xs md:text-base w-24 md:w-36">Create New Movie</button>
+        <div className="flex flex-row flex-wrap justify-evenly gap-10 px-5 pb-5">
+            {
+                movieList?.length > 0 ? (
+                        movieList.map((movie) => (
+                            <Link key={movie.id} href={`/local/movies/${movie.id}`} className="card w-96 bg-base-100 shadow-xl hover:bg-zinc-700">
+                                <figure><img className="w-52 m-auto mt-4" src={movie.poster_url} alt={movie.title} /></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title">{movie.title}</h2>
+                                    <button className="btn mt-auto btn-error" onClick={(e) => onHandleDelete(movie.id, e)}>Delete</button>
+                                    <button className="btn btn-info" onClick={(e) => onHandleEdit(movie.id, e)}>Edit</button>
+                                </div>
+                            </Link>
+                        ))
 
-                <Link href="/local/movies/search" title="Search" className="input input-bordered flex items-center gap-2 bg-teal-950 hover:bg-zinc-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path fillRule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clipRule="evenodd" /></svg>
-                </Link>
-                </div>
-            </header>
-
-            <div className="flex flex-row flex-wrap justify-between gap-5 px-5 pb-5">
-                {
-                    state?.movies?.length > 0 ? (
-                            state.movies.map((movie) => (
-                                <Link href={`/local/movies/${movie.id}`} className="card w-96 bg-base-100 shadow-xl hover:bg-zinc-700">
-                                    <figure><img className="w-52 m-auto mt-4" src={movie.poster_url} alt={movie.title} /></figure>
-                                    <div className="card-body">
-                                        <h2 className="card-title">{movie.title}</h2>
-                                        <button className="btn mt-auto btn-error" onClick={(e) => onHandleDelete(movie.id, e)}>Delete</button>
-                                        <button className="btn btn-info" onClick={(e) => onHandleEdit(movie.id, e)}>Edit</button>
-                                    </div>
-                                </Link>
-                            ))
-
-                    ) : (
-                        <h2>No Movies Yet</h2>
-                    )
-                }
-                <div className="w-96"></div>
-            </div>
+                ) : (
+                    <h2>No movies found</h2>
+                )
+            }
         </div>
     );
 }
