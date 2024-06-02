@@ -18,6 +18,7 @@ export default function EditMovie({params}) {
 
     useEffect(() => {
         const movie = state?.movies?.find((movie) => `${movie.id}` === `${params.movie_id}`);
+        console.log(movie)
         if (!movie){
             router.push('/local/movies');
             return;
