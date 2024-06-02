@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Short Description
+#### [Link To The (Production) Website!](https://ss2024-fwoc-two.vercel.app/)
+The plan from Initial Movie Concept was extrpolated to include CRUD functionality, however, it was not our intention at the beginning.
+This website includes two servers which are TMDB and Local. TMDB Mode has the list of trendy movies fetched from API. As to Local Mode, it uses CRUD functionallity to store list of movies in local storage.
+In terms of design, we adapted our website to both Desktop and Mobile versions.
+#### The main features of the Website are:
+### TMDB Mode Includes:
+### Homepage:
+* Fetches the list of movies from TMDB API.
+* Movies are decorated with Movie Cards, which have Movie Title and Rating of the particular movie.
+### Details Page:
+* Uses id of a certain movie to display information about it.
+### Search Page:
+* Finds list of movies based on what is written in the Search Bar.
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Local Mode Includes:
+### Homepage:
+* Displays a list of movies that we store in local storage and also filters movie list based on what we put inside a search bar.
+* Movies are decorated with Movie Cards, which have Movie Title, Movie Poster, Edit Button and Delete Button.
+### Details Page:
+* Finds a specific movie inside a movie list based on id and displays its details.
+### Create Page:
+* A form for creating a new movie and putting it inside local storage.
+### Edit Page:
+* A form for editing an existing movie.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> **Important Side Note:** If you try to run the code that you obtained from zip file, the website will not be able to display a list of movies in TMDB Mode as you don't have access to API Key. However, you can use Local Mode without any difficulties as it doesn’t utilize any API.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Instruction for Installation and Running the Code:
+* Unzip
+* npm install
+* npm run dev
