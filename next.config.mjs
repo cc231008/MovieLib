@@ -5,12 +5,12 @@ const nextConfig = {
             {
                 source: '/tmdb',
                 destination: '/tmdb/movies',
-                permanent: true,
+                permanent: false,
             },
             {
                 source: '/',
                 destination: '/tmdb/movies',
-                permanent: true,
+                permanent: false,
             },
             {
                 source: '/local',

@@ -16,7 +16,7 @@ export const AppProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));// save the state to local storage whenever the state changes (i.e., whenever the user interacts with the app) so that the state is persisted across page reloads.
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state)); // Save the app state to the local storage which stores properties in key-value pairs.
     }, [state]);
 
     return (
